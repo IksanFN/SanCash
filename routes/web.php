@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
@@ -54,6 +55,18 @@ Route::middleware('auth')->group(function() {
             Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
             Route::put('/edit/{user}', [UserController::class, 'update'])->name('update');
             Route::delete('/delete/{user}', [UserController::class, 'destroy'])->name('destroy');
+        });
+
+        // Student
+        Route::prefix('student')->name('student.')->group(function() {
+            Route::get('/', [StudentController::class, 'index'])->name('index');
+            Route::post('/', [StudentController::class, 'store'])->name('store');
+            Route::get('/detail/{student}', [StudentController::class, 'show'])->name('show');
+            Route::get('/create', [StudentController::class, 'create'])->name('create');
+            Route::get('/detail/{uuid}', [StudentController::class, 'show'])->name('show');
+            Route::get('/edit/{uuid}', [StudentController::class, 'edit'])->name('edit');
+            Route::put('/update/{uuid}', [StudentController::class, 'update'])->name('update');
+            Route::delete('/delete/{uuid}', [StudentController::class, 'destroy'])->name('destroy');
         });
 
     });
