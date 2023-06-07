@@ -14,7 +14,7 @@
               Data Siswa
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Siswa</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.student.index') }}">Student</a></li>
               <li><a class="dropdown-item" href="{{ route('admin.kelas.index') }}">Kelas</a></li>
               <li><a class="dropdown-item" href="{{ route('admin.jurusan.index') }}">Jurusan</a></li>
             </ul>

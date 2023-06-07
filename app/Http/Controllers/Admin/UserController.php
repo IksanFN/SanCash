@@ -25,8 +25,13 @@ class UserController extends Controller
         $request->except('_token');
 
         // Get name file & hash name
-        $image = $request->file('avatar');
-        $image->storeAs('public/avatar', $image->hashName());
+        if ($request->file('avatar')) {
+            $image = $request->file('avatar');
+            $image->storeAs('public/avatar', $image->hashName());
+            $image = $image->hashName();
+        } else {
+            $image = NULL;
+        }
 
         // Insert to database
         $user = User::create([
@@ -35,7 +40,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'avatar' => $image->hashName(),
+            'avatar' => $image,
         ]);
 
         // Check condition

@@ -2,10 +2,106 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Jurusan;
+use App\Models\Student;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Student\Store;
+use App\Http\Requests\Admin\Student\Update;
 
 class StudentController extends Controller
 {
-    //
+    public function index()
+    {
+        $nomor = 1;
+        $students = Student::with(['User', 'Kelas'])->latest()->paginate(15);
+        return view('admin.student.index', compact('students', 'nomor'));
+    }
+
+    public function show($uuid)
+    {
+        $student = Student::with(['User', 'Kelas', 'Jurusan'])->whereUuid($uuid)->first();
+        return view('admin.student.show', compact('student'));
+    }
+
+    public function create()
+    {
+        $users = User::select('id', 'name')->whereNot('role', 'admin')->get();
+        $allKelas = Kelas::select('id', 'name')->get();
+        $jurusans = Jurusan::select('id', 'name', 'jurusan_code')->get();
+        return view('admin.student.create', compact('users', 'allKelas', 'jurusans'));
+    }
+
+    public function edit($uuid)
+    {
+        $allKelas = Kelas::select('id', 'name')->get();
+        $users = User::select('id', 'name')->whereNot('role', 'admin')->get();
+        $jurusans = Jurusan::select('id', 'name', 'jurusan_code')->get();
+        $student = Student::with(['User', 'Kelas', 'Jurusan'])->whereUuid($uuid)->first();
+        return view('admin.student.edit', compact('student', 'allKelas', 'jurusans', 'users'));
+    }
+
+    public function update(Update $request, $uuid)
+    {
+        $student = Student::whereUuid($uuid)->first();
+
+        $data = [
+            'user_id' => $request->user_id,
+            'jurusan_id' => $request->jurusan_id,
+            'kelas_id' => $request->kelas_id,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'alamat' => $request->alamat,
+        ];
+
+        if ($student->update($data)) {
+            session()->flash('success', 'Data berhasil di update');
+            return redirect()->route('admin.student.index');
+        } else {
+            session()->flash('error', 'Data gagal di update');
+            return redirect()->route('admin.student.index');
+        }
+    }
+
+    public function store(Store $request)
+    {
+        // Hidden token
+        $request->except('_token');
+
+        // Insert to database
+        $student = Student::create([
+            'uuid' => Str::uuid(10),
+            'user_id' => $request->user_id,
+            'kelas_id' => $request->kelas_id,
+            'jurusan_id' => $request->jurusan_id,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'alamat' => $request->alamat,
+        ]);
+
+        // Condition
+        if ($student) {
+            session()->flash('success', 'Data berhasil di simpan');
+        } else {
+            session()->flash('error', 'Data gagal di simpan');
+        }
+
+        // redirect
+        return redirect()->route('admin.student.index');
+    }
+
+    public function destroy($uuid)
+    {
+        $student = Student::whereUuid($uuid)->first();
+        if ($student->delete()) {
+            session()->flash('success', 'Data berhasil di hapus');
+            return redirect()->route('admin.student.index');
+        } else {
+            session()->flash('error', 'Data gagal di hapus');
+            return redirect()->route('admin.student.index');
+        }
+    }
 }
