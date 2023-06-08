@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\MonthBillController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\PostController;
@@ -67,6 +68,12 @@ Route::middleware('auth')->group(function() {
             Route::get('/edit/{uuid}', [StudentController::class, 'edit'])->name('edit');
             Route::put('/update/{uuid}', [StudentController::class, 'update'])->name('update');
             Route::delete('/delete/{uuid}', [StudentController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::prefix('month-bill')->name('month_bill.')->group(function() {
+            Route::get('/', [MonthBillController::class, 'index'])->name('index');
+            Route::post('/', [MonthBillController::class, 'store'])->name('store');
+            Route::delete('/delete/{monthBill}', [MonthBillController::class, 'destroy'])->name('destroy');
         });
 
     });

@@ -24,9 +24,9 @@
               Data Bills
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Bill</a></li>
+              <li><a class="dropdown-item" href="">Bill</a></li>
               <li><a class="dropdown-item" href="#">Week Bill</a></li>
-              <li><a class="dropdown-item" href="#">Month Bill</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.month_bill.index') }}">Month Bill</a></li>
             </ul>
           </li>
           <li class="nav-item">

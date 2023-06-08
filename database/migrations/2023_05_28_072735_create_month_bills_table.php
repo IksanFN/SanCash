@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('month_bills', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('year');
             $table->text('description')->nullable();
             $table->timestamps();
         });
