@@ -73,6 +73,8 @@ Route::middleware('auth')->group(function() {
         Route::prefix('month-bill')->name('month_bill.')->group(function() {
             Route::get('/', [MonthBillController::class, 'index'])->name('index');
             Route::post('/', [MonthBillController::class, 'store'])->name('store');
+            Route::get('/edit/{monthBill}', [MonthBillController::class, 'edit'])->name('edit');
+            Route::put('/update/{monthBill}', [MonthBillController::class, 'update'])->name('update');
             Route::delete('/delete/{monthBill}', [MonthBillController::class, 'destroy'])->name('destroy');
         });
 

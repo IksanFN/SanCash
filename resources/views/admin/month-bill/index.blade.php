@@ -43,13 +43,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Tahun</label>
-                                <input type="text" name="year" class="form-control" placeholder="Tahun tagihan">
-                                @error('year')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
                             <div class="mb-4">
                                 <label class="mb-1">Description</label>
                                 <textarea class="form-control" name="description" placeholder="Description class">{{ old('description') }}</textarea>
@@ -79,7 +72,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Bulan</th>
-                                        <th>Tahun</th>
                                         <th style="max-width: 100px">Description</th>
                                         <th>Action</th>
                                     </tr>
@@ -89,10 +81,9 @@
                                     <tr>
                                         <td>{{ $nomor++ }}</td>
                                         <td>{{ $monthBill->name }}</td>
-                                        <td>{{ $monthBill->year }}</td>
                                         <td style="max-width: 150px">{{ $monthBill->description }}</td>
                                         <td class="text-center d-flex">
-                                            <a href="" class="btn btn-sm shadow-sm btn-primary">Edit</a>
+                                            <a href="{{ route('admin.month_bill.edit', $monthBill->id) }}" class="btn btn-sm shadow-sm btn-primary">Edit</a>
                                             <form action="{{ route('admin.month_bill.destroy', $monthBill->id) }}" class="ms-1" method="post">
                                                 @csrf
                                                 @method('DELETE')

@@ -4,8 +4,9 @@ namespace App\Http\Requests\Admin\MonthBill;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-class Store extends FormRequest
+class Update extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +24,7 @@ class Store extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'unique:month_bills'],
+            'name' => ['required', Rule::unique('month_bills', 'id')->ignore($this->id, 'id')],
             'description' => ['nullable'],
         ];
     }

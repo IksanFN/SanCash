@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MonthBill\Store;
+use App\Http\Requests\Admin\MonthBill\Update;
 use App\Models\MonthBill;
 use Illuminate\Http\Request;
 
@@ -18,13 +19,8 @@ class MonthBillController extends Controller
 
     public function store(Store $request)
     {
-        if ($monthBill = MonthBill::where('name', $request->name)->where('year', $request->year)->exists()) {
-            return back()->withErrors(['duplicate' => "Data bulan tagihan {$request->name} di tahun {$request->year} sudah ada"]);
-        }
-
         $createMonthBill = MonthBill::create([
             'name' => $request->name,
-            'year' => $request->year,
             'description' => $request->description,
         ]);
 
@@ -34,6 +30,30 @@ class MonthBillController extends Controller
         } else {
             session()->flash('error', 'Data berhasil di simpan');
             return back();
+        }
+    }
+
+    public function edit(MonthBill $monthBill)
+    {
+        $monthBill = MonthBill::whereId($monthBill->id)->first();
+        return view('admin.month-bill.edit', compact('monthBill'));
+    }
+
+    public function update(Update $request, MonthBill $monthBill)
+    {
+        // if ($monthBill = MonthBill::where('name', $request->name)->where('year', $request->year)->exists()) {
+        //     return back()->withErrors(['duplicate' => "Data bulan tagihan {$request->name} di tahun {$request->year} sudah ada"]);
+        // }
+
+        $monthBill = MonthBill::whereId($monthBill->id)->first();
+        $monthBill->update($request->all());
+
+        if ($monthBill) {
+            session()->flash('success', 'Data berhasil di update!');
+            return redirect()->route('admin.month_bill.index');
+        } else {
+            session()->flash('error', 'Data berhasil di update!');
+            return redirect()->route('admin.month_bill.index');
         }
     }
 
