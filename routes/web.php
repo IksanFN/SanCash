@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MonthBillController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\YearController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\LoginController as StudentLoginController;
@@ -70,12 +71,22 @@ Route::middleware('auth')->group(function() {
             Route::delete('/delete/{uuid}', [StudentController::class, 'destroy'])->name('destroy');
         });
 
+        // Route Month Bill
         Route::prefix('month-bill')->name('month_bill.')->group(function() {
             Route::get('/', [MonthBillController::class, 'index'])->name('index');
             Route::post('/', [MonthBillController::class, 'store'])->name('store');
             Route::get('/edit/{monthBill}', [MonthBillController::class, 'edit'])->name('edit');
             Route::put('/update/{monthBill}', [MonthBillController::class, 'update'])->name('update');
             Route::delete('/delete/{monthBill}', [MonthBillController::class, 'destroy'])->name('destroy');
+        });
+
+        // Route Year
+        Route::prefix('year')->name('year.')->group(function() {
+            Route::get('/', [YearController::class, 'index'])->name('index');
+            Route::post('/', [YearController::class, 'store'])->name('store');
+            Route::get('/edit/{year}', [YearController::class, 'edit'])->name('edit');
+            Route::put('/update/{year}', [YearController::class, 'update'])->name('update');
+            Route::delete('/delete/{year}', [YearController::class, 'destroy'])->name('destroy');
         });
 
     });

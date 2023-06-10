@@ -7,7 +7,7 @@
         {{-- Heading --}}
         <div class="card border-0 px-3 pt-2 mb-2">
             <div class="card-body">
-              <h5 class="fw-medium text-green">Student</h5>
+              <h5 class="fw-medium text-green">Bulan</h5>
             </div>
         </div>
 
