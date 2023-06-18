@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class WeekBill extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'description'];
 }

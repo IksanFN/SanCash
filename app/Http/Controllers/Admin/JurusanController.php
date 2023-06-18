@@ -12,14 +12,16 @@ class JurusanController extends Controller
 {
     public function index()
     {
-        $listJurusan = Jurusan::latest()->paginate(5);
         $nomor = 1;
+        // Get data
+        $listJurusan = Jurusan::latest()->paginate(5);
         return view('admin.jurusan.index', compact('listJurusan', 'nomor'));
     }
 
     public function edit(Jurusan $jurusan)
     {
-        $oneJurusan = Jurusan::whereId($jurusan->id)->first();
+        // Find data by ID
+        $oneJurusan = Jurusan::find($jurusan->id);
         return view('admin.jurusan.edit', compact('oneJurusan'));
     }
 

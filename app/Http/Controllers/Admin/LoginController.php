@@ -17,10 +17,11 @@ class LoginController extends Controller
 
     public function loginAdmin(AdminLogin $request)
     {
+        // Credentials
         $credentials = $request->only('email', 'password');
         $credentials['role'] = 'admin';
 
-        // Condition check
+        // Check Condition
         if (Auth::attempt($credentials)) {
             // Generate Session
             $request->session()->regenerate();

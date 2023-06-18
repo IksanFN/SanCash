@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\MonthBillController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WeekBillController;
 use App\Http\Controllers\Admin\YearController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
@@ -71,7 +72,7 @@ Route::middleware('auth')->group(function() {
             Route::delete('/delete/{uuid}', [StudentController::class, 'destroy'])->name('destroy');
         });
 
-        // Route Month Bill
+        // Month
         Route::prefix('month-bill')->name('month_bill.')->group(function() {
             Route::get('/', [MonthBillController::class, 'index'])->name('index');
             Route::post('/', [MonthBillController::class, 'store'])->name('store');
@@ -80,13 +81,22 @@ Route::middleware('auth')->group(function() {
             Route::delete('/delete/{monthBill}', [MonthBillController::class, 'destroy'])->name('destroy');
         });
 
-        // Route Year
+        // Year
         Route::prefix('year')->name('year.')->group(function() {
             Route::get('/', [YearController::class, 'index'])->name('index');
             Route::post('/', [YearController::class, 'store'])->name('store');
             Route::get('/edit/{year}', [YearController::class, 'edit'])->name('edit');
             Route::put('/update/{year}', [YearController::class, 'update'])->name('update');
             Route::delete('/delete/{year}', [YearController::class, 'destroy'])->name('destroy');
+        });
+
+        // Week
+        Route::prefix('week')->name('week.')->group(function() {
+            Route::get('/', [WeekBillController::class, 'index'])->name('index');    
+            Route::post('/', [WeekBillController::class, 'store'])->name('store');    
+            Route::get('/edit/{week}', [WeekBillController::class, 'edit'])->name('edit');    
+            Route::put('/update/{week}', [WeekBillController::class, 'update'])->name('update');    
+            Route::delete('/delete/{week}', [WeekBillController::class, 'destroy'])->name('destroy');    
         });
 
     });

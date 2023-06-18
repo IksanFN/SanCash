@@ -14,6 +14,7 @@ class YearController extends Controller
     public function index()
     {
         $nomor = 1;
+        // Get data
         $years = Year::latest()->paginate(6);
         return view('admin.year.index', compact('years', 'nomor'));
     }
@@ -38,13 +39,14 @@ class YearController extends Controller
 
     public function edit(Year $year)
     {
-        $year = Year::whereId($year->id)->first();
+        // Find data by ID
+        $year = Year::find($year->id);
         return view('admin.year.edit', compact('year'));
     }
 
     public function update(Update $request, Year $year)
     {
-        $year = Year::whereId($year->id)->first();
+        // Update data
         $year->update($request->all());
 
         if ($year) {
@@ -58,7 +60,7 @@ class YearController extends Controller
 
     public function destroy(Year $year)
     {
-        $year = Year::whereId($year->id)->first();
+        // Check Condition
         if ($year->delete()) {
             session()->flash('success', 'Data berhasil di hapus!');
             return back();

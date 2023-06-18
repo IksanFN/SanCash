@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $request->except('_token');
         // Get User By ID
-        $user = User::whereId($user->id);
+        $user = User::find($user->id);
 
         // Check if avatar uploaded
         if ($request->hasFile('avatar')) {
