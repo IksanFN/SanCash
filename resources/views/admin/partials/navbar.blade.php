@@ -25,8 +25,8 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="">Tagihan</a></li>
-              <li><a class="dropdown-item" href="#">Minggu</a></li>
-              <li><a class="dropdown-item" href="{{ route('admin.month_bill.index') }}">Bulan</a></li>
+              <li><a class="dropdown-item" href="">Minggu</a></li>
+              <li><a class="dropdown-item" href="">Bulan</a></li>
               <li><a href="{{ route('admin.year.index') }}" class="dropdown-item">Tahun</a></li>
             </ul>
           </li>

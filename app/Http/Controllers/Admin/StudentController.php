@@ -17,18 +17,21 @@ class StudentController extends Controller
     public function index()
     {
         $nomor = 1;
+        // Get data Student with User & Kelas
         $students = Student::with(['User', 'Kelas'])->latest()->paginate(15);
         return view('admin.student.index', compact('students', 'nomor'));
     }
 
     public function show($uuid)
     {
+        // Get data by Uuid
         $student = Student::with(['User', 'Kelas', 'Jurusan'])->whereUuid($uuid)->first();
         return view('admin.student.show', compact('student'));
     }
 
     public function create()
     {
+        // Get data User, Kelas & Jurusan
         $users = User::select('id', 'name')->whereNot('role', 'admin')->get();
         $allKelas = Kelas::select('id', 'name')->get();
         $jurusans = Jurusan::select('id', 'name', 'jurusan_code')->get();
@@ -37,17 +40,22 @@ class StudentController extends Controller
 
     public function edit($uuid)
     {
+        // Get data Kelas, User, & Jurusan
         $allKelas = Kelas::select('id', 'name')->get();
         $users = User::select('id', 'name')->whereNot('role', 'admin')->get();
         $jurusans = Jurusan::select('id', 'name', 'jurusan_code')->get();
+
+        // Get data by Uuid
         $student = Student::with(['User', 'Kelas', 'Jurusan'])->whereUuid($uuid)->first();
         return view('admin.student.edit', compact('student', 'allKelas', 'jurusans', 'users'));
     }
 
     public function update(Update $request, $uuid)
     {
+        // Update data by ID
         $student = Student::whereUuid($uuid)->first();
 
+        // Assigne request to $data
         $data = [
             'user_id' => $request->user_id,
             'jurusan_id' => $request->jurusan_id,
@@ -57,6 +65,7 @@ class StudentController extends Controller
             'alamat' => $request->alamat,
         ];
 
+        // Check Condition
         if ($student->update($data)) {
             session()->flash('success', 'Data berhasil di update');
             return redirect()->route('admin.student.index');
@@ -82,7 +91,7 @@ class StudentController extends Controller
             'alamat' => $request->alamat,
         ]);
 
-        // Condition
+        // Check Condition
         if ($student) {
             session()->flash('success', 'Data berhasil di simpan');
         } else {

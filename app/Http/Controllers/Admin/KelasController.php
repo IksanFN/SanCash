@@ -12,9 +12,9 @@ class KelasController extends Controller
 {
     public function index()
     {
-        // Get data 
-        $listKelas = Kelas::latest()->paginate(5);
         $nomor = 1;
+        // Get data
+        $listKelas = Kelas::latest()->paginate(5);
         return view('admin.kelas.index', compact('listKelas', 'nomor'));
     }
 
@@ -38,8 +38,8 @@ class KelasController extends Controller
 
     public function edit(Kelas $kelas)
     {
-        // Get data by Id
-        $oneKelas = Kelas::whereId($kelas->id)->first();
+        // Find data by Id
+        $oneKelas = Kelas::find($kelas->id);
         return view('admin.kelas.edit', compact('oneKelas'));
     }
 
