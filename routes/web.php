@@ -112,6 +112,7 @@ Route::middleware('auth')->group(function() {
 
             // List Bill
             Route::get('/list-tagihan/{bill}', [BillController::class, 'listBill'])->name('list_bill');
+            Route::get('/invoice/{transaction}', [BillController::class, 'invoice'])->name('invoice');
         });
 
         // Transaction
