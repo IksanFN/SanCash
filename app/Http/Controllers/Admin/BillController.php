@@ -92,7 +92,17 @@ class BillController extends Controller
             if ($bill) {
 
                 // Looping ID, then Insert to Table Transaction
-                foreach ($students as $student) {
+                foreach ($students as $student) {   
+
+                    // Generate Invoice Code
+                    $lastInvoice = Transaction::orderBy('id', 'desc')->first();
+                    if ($lastInvoice) {
+                        $lastCode = $lastInvoice->invoice;
+                        $numericPart = intval(substr($lastCode, -3)) + 1;
+                        $newCode = 'INV/'.Str::upper($bill->monthBill->name).'/'.str_pad($numericPart, 3, '0', STR_PAD_LEFT);
+                    } else {
+                        $newCode = "INV/".Str::upper($bill->monthBill->name).'/001';
+                    }
 
                     // Insert to database
                     $createTransaction = new Transaction();
@@ -100,6 +110,7 @@ class BillController extends Controller
                     $createTransaction->student_id = $student->id;
                     $createTransaction->bill_id = $idBill;
                     $createTransaction->payment_status = 'Belum Bayar';
+                    $createTransaction->invoice = $newCode;
                     $createTransaction->save();
                 }
 
@@ -119,5 +130,12 @@ class BillController extends Controller
         // Get data by uuid
         $bill = Bill::whereUuid($uuid)->first();
         return view('admin.bill.edit', compact('bill'));
+    }
+
+    // Show Invoice
+    public function invoice(Transaction $transaction)
+    {
+        $invoice = $transaction;
+        return view('admin.bill.invoice', compact('invoice'));
     }
 }
