@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('student_id')->constrained();
             $table->foreignId('bill_id')->constrained();
-            $table->string('payment_status');
+            $table->string('payment_status')->nullable()->default('Belum Bayar');
             $table->boolean('is_paid')->default(false);
-            $table->date('payment_date');
-            $table->enum('payment_method', ['Manual', 'Otomatis']);
+            $table->date('payment_date')->nullable();
+            $table->enum('payment_method', ['Manual', 'Otomatis'])->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\JurusanController;
 use App\Http\Controllers\Admin\KelasController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\YearController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\LoginController as StudentLoginController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('posts', PostController::class);
@@ -97,6 +99,25 @@ Route::middleware('auth')->group(function() {
             Route::get('/edit/{week}', [WeekBillController::class, 'edit'])->name('edit');    
             Route::put('/update/{week}', [WeekBillController::class, 'update'])->name('update');    
             Route::delete('/delete/{week}', [WeekBillController::class, 'destroy'])->name('destroy');    
+        });
+
+        // Bill
+        Route::prefix('bill')->name('bill.')->group(function() {
+            Route::get('/', [BillController::class, 'index'])->name('index');
+            Route::get('/create', [BillController::class, 'create'])->name('create');
+            Route::post('/store', [BillController::class, 'storeByClass'])->name('store');
+            Route::get('/edit/{bill}', [BillController::class, 'edit'])->name('edit');
+            Route::put('/update/{bill}', [BillController::class, 'update'])->name('update');
+            Route::delete('/delete/{bill}', [BillController::class, 'destroy'])->name('destroy');
+
+            // List Bill
+            Route::get('/list-tagihan/{bill}', [BillController::class, 'listBill'])->name('list_bill');
+        });
+
+        // Transaction
+        Route::prefix('transaction')->name('transaction.')->group(function() {
+            Route::get('/checkout/{transaction}', [BillController::class, 'checkout'])->name('checkout');
+            Route::post('/payment/{transaction}', [TransactionController::class, 'payment'])->name('payment');
         });
 
     });

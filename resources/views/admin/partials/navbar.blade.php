@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-white py-3 sticky-top">
     <div class="container">
-      <a class="navbar-brand fw-semibold text-primary" href="">Cash-Control</a>
+      <a class="navbar-brand fw-semibold text-primary" href="">SanCash</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,9 +24,9 @@
               Data Bills
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Tagihan</a></li>
-              <li><a class="dropdown-item" href="">Minggu</a></li>
-              <li><a class="dropdown-item" href="">Bulan</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.bill.index') }}">Tagihan</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.week.index') }}">Minggu</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.month_bill.index') }}">Bulan</a></li>
               <li><a href="{{ route('admin.year.index') }}" class="dropdown-item">Tahun</a></li>
             </ul>
           </li>
