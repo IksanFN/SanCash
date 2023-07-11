@@ -14,6 +14,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\LoginController as StudentLoginController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('posts', PostController::class);
@@ -117,8 +118,9 @@ Route::middleware('auth')->group(function() {
 
         // Transaction
         Route::prefix('transaction')->name('transaction.')->group(function() {
-            Route::get('/checkout/{transaction}', [BillController::class, 'checkout'])->name('checkout');
+            Route::get('/checkout/{uuid}', [BillController::class, 'checkout'])->name('checkout');
             Route::post('/payment/{transaction}', [TransactionController::class, 'payment'])->name('payment');
+            Route::get('/download-invoice/{transaction}', [TransactionController::class, 'createPDF'])->name('download_invoice');
         });
 
     });

@@ -53,7 +53,7 @@
                                             </td>
                                             <td>
                                                 @if ($transaction->payment_status == 'Belum Bayar' && $transaction->status == 0)
-                                                    <a href="{{ route('admin.transaction.checkout', $transaction->student_id) }}" class="btn btn-primary btn-sm">Checkout</a>
+                                                    <a href="{{ route('admin.transaction.checkout', $transaction->uuid) }}" class="btn btn-primary btn-sm">Checkout</a>
                                                 @else
                                                     <a href="{{ route('admin.bill.invoice', $transaction->id) }}" class="btn btn-secondary btn-sm">Invoice</a>
                                                 @endif
