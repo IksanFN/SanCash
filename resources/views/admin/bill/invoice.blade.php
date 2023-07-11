@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <a href="{{ route('admin.bill.list_bill', $invoice->bill_id) }}" class="btn btn-secondary btn-sm shadow-sm mb-3">Kembali</a>
-                <a href="" class="btn btn-primary btn-sm shadow-sm mb-3">Export PDF</a>
+                <a href="{{ route('admin.transaction.download_invoice', $invoice->id) }}" class="btn btn-primary btn-sm shadow-sm mb-3">Export PDF</a>
                 <div class="card border-0 px-3 pt-3 pb-2">
                     <div class="card-body">
                         <div class="row">
@@ -38,19 +38,31 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                    <tr>
+                                    <tr class="bg-light">
                                         <th>Nama</th>
-                                        <th>Kelas</th>
-                                        <th>Tagihan</th>
-                                        <th>Status</th>
+                                        <th style="text-align: right;">Nilai</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Iksan Fauzi</td>
-                                        <td>XII RPL 1</td>
-                                        <td>10.000</td>
-                                        <td>Paid</td>
+                                        <td>Nama Siswa</td>
+                                        <td style="text-align: right;">{{ $invoice->student->user->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kelas</td>
+                                        <td style="text-align: right;">{{ $invoice->student->kelas->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td style="text-align: right;">{{ $invoice->payment_status }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Bayar</td>
+                                        <td style="text-align: right;">{{ $invoice->payment_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tagihan</td>
+                                        <td style="text-align: right;">IDR {{ number_format($invoice->bill->bill) }}</td>
                                     </tr>
                                 </tbody>
                             </table>

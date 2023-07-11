@@ -41,7 +41,7 @@ class BillController extends Controller
                     ->whereBillId($bill->id)
                     // ->where('end_of_week', '<=', )
                     ->get();
-
+        // return $transactions;
         // Data name bill
         $name = Bill::with('weekBill', 'monthBill', 'year')
                     ->whereWeekBillId($bill->week_bill_id)
@@ -52,10 +52,9 @@ class BillController extends Controller
         return view('admin.bill.list-bill', compact('nomor', 'name', 'transactions'));
     }
 
-    public function checkout(Transaction $transaction)
+    public function checkout($uuid)
     {
-        $checkout = Transaction::with(['bill', 'student', 'user'])->whereStudentId($transaction->student_id)->whereBillId($transaction->bill_id)->first();
-        // return dd($checkout);
+        $checkout = Transaction::with(['bill', 'student', 'user'])->whereUuid($uuid)->first();
         return view('admin.bill.checkout', compact('checkout'));
     }
 
