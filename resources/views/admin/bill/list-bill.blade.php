@@ -14,6 +14,7 @@
         </div>
         
         <a href="{{ route('admin.bill.index') }}" class="btn btn-sm btn-secondary mb-3">Kembali</a>
+        <a href="{{ route('admin.transaction.export', $name->id) }}" class="btn btn-sm btn-success mb-3">Export Excel</a>
 
         @include('admin.partials.alert')
 

@@ -50,22 +50,22 @@
 				background: #eee;
 				border-bottom: 1px solid #ddd;
 				font-weight: bold;
-        padding-left: 8px;
-        padding-right: 8px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+				padding-left: 8px;
+				padding-right: 8px;
+				padding-top: 5px;
+				padding-bottom: 5px;
 			}
 
 			.invoice-box table tr.details td {
 				padding-bottom: 20px;
 			}
 
-      .invoice-box table tr td h1 {
-        padding-bottom: 0.5rem;
-      }
-      .invoice-box table tr td p {
-        margin-bottom: 0;
-      }
+			.invoice-box table tr td h1 {
+				padding-bottom: 0.5rem;
+			}
+			.invoice-box table tr td p {
+				margin-bottom: 0;
+			}
 
 			.invoice-box table tr.item td {
                 padding: 10px;
@@ -114,6 +114,8 @@
 	<body>
 		<div class="invoice-box">
 			<table cellpadding="0" cellspacing="0">
+
+				{{-- Header --}}
 				<tr class="top">
 					<td colspan="2">
 						<table>
@@ -128,10 +130,12 @@
 					</td>
 				</tr>
 
+				{{-- Body --}}
 				<tr class="information">
 					<td colspan="2">
 						<table>
 							<tr>
+								{{-- Company Information --}}
 								<td>
 									Bill From:<br>
 									<strong>SanCash</strong><br />
@@ -139,6 +143,7 @@
 									Sunnyville, CA 12345
 								</td>
 
+								{{-- Student Information--}}
 								<td>
 									Bill To:<br>
 									<strong>{{ $studentName }}</strong><br />
@@ -150,36 +155,38 @@
 					</td>
 				</tr>
 
-
+				{{-- Heading Table --}}
 				<tr class="heading">
 					<td>Key</td>
-
 					<td>Value</td>
 				</tr>
 
+				{{-- Item Name --}}
 				<tr class="item">
 					<td>Nama</td>
-
 					<td>{{ $studentName }}</td>
 				</tr>
 
+				{{-- Item Kelas --}}
 				<tr class="item">
 					<td>Kelas</td>
-
 					<td>{{ $className }}</td>
 				</tr>
 
+				{{-- Item Status --}}
 				<tr class="item">
 					<td>Status</td>
 					<td>{{ $status }}</td>
 				</tr>
 
+				{{-- Item Payment Date --}}
 				<tr class="item">
-					<td>Status</td>
+					<td>Tanggal Bayar</td>
 					<td>{{ $date }}</td>
 				</tr>
 
-        <tr class="item last">
+				{{-- Item Bill --}}
+        		<tr class="item last">
 					<td>Tagihan</td>
 					<td>IDR {{ number_format($bill) }}</td>
 				</tr>

@@ -121,6 +121,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/checkout/{uuid}', [BillController::class, 'checkout'])->name('checkout');
             Route::post('/payment/{transaction}', [TransactionController::class, 'payment'])->name('payment');
             Route::get('/download-invoice/{transaction}', [TransactionController::class, 'createPDF'])->name('download_invoice');
+            Route::get('/export-excel/{id}', [TransactionController::class, 'export'])->name('export');
         });
 
     });
