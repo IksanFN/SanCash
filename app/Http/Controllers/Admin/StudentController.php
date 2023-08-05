@@ -79,6 +79,10 @@ class StudentController extends Controller
     {
         // Hidden token
         $request->except('_token');
+       
+        $student = User::find($request->user_id);
+        $class = Kelas::find($request->kelas_id);
+        $jurusan = Jurusan::find($request->jurusan_id);
 
         // Insert to database
         $student = Student::create([
@@ -86,6 +90,11 @@ class StudentController extends Controller
             'user_id' => $request->user_id,
             'kelas_id' => $request->kelas_id,
             'jurusan_id' => $request->jurusan_id,
+            'student_avatar' => $student->avatar,
+            'student_name' => $student->name,
+            'student_nisn' => $student->nisn,
+            'student_class' => $class->name,
+            'student_jurusan' => $jurusan->name,
             'gender' => $request->gender,
             'phone' => $request->phone,
             'alamat' => $request->alamat,
