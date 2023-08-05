@@ -17,6 +17,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('kelas_id')->constrained();
             $table->foreignId('jurusan_id')->constrained();
+            $table->string('student_avatar')->nullable();
+            $table->string('student_name')->nullable();
+            $table->integer('student_nisn')->nullable();
+            $table->string('student_class')->nullable();
+            $table->string('student_jurusan')->nullable();
             $table->string('phone');
             $table->enum('gender', ['Male', 'Female']);
             $table->text('alamat');

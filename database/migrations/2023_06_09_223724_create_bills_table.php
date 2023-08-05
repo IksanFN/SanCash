@@ -19,6 +19,10 @@ return new class extends Migration
             $table->foreignId('month_bill_id')->constrained();
             $table->foreignId('week_bill_id')->constrained();
             $table->foreignId('year_id')->constrained();
+            $table->string('kelas_name')->nullable();
+            $table->string('month_name')->nullable();
+            $table->string('week_name')->nullable();
+            $table->string('year_name')->nullable();
             $table->date('start_of_week');
             $table->date('end_of_week');
             $table->integer('bill')->unsigned();

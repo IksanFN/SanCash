@@ -16,6 +16,15 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->foreignId('student_id')->constrained();
             $table->foreignId('bill_id')->constrained();
+            $table->string('student_nisn');
+            $table->string('student_name');
+            $table->string('student_kelas');
+            $table->string('student_jurusan');
+            $table->string('bill_name');
+            $table->string('bill_year');
+            $table->string('bill_month');
+            $table->string('bill_week');
+            $table->integer('bill');
             $table->string('payment_status')->nullable()->default('Belum Bayar');
             $table->boolean('is_paid')->default(false);
             $table->date('payment_date')->nullable();

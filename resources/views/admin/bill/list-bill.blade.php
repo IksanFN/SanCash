@@ -41,10 +41,10 @@
                                     @forelse ($transactions as $transaction)
                                         <tr>
                                             <td>{{ $nomor }}</td>
-                                            <td>{{ $transaction->student->user->nisn }}</td>
-                                            <td>{{ $transaction->student->user->name }}</td>
-                                            <td>{{ $transaction->bill->kelas->name }}</td>
-                                            <td>Rp. {{ number_format($transaction->bill->bill) }}</td>
+                                            <td>{{ $transaction->student_nisn }}</td>
+                                            <td>{{ $transaction->student_name }}</td>
+                                            <td>{{ $transaction->student_kelas }}</td>
+                                            <td>Rp. {{ number_format($transaction->bill) }}</td>
                                             <td>
                                                 @if ($transaction->payment_status == 'Belum Bayar')
                                                     <span class="badge bg-warning">Belum Bayar</span>

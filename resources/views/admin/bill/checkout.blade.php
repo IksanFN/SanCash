@@ -26,15 +26,15 @@
                                 <div class="col-md-6">
                                     <div class="mb-2">
                                         <label>Nama</label>
-                                        <input type="text" class="form-control" value="{{ $checkout->student->user->name }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $checkout->student_name }}" readonly>
                                     </div>
                                     <div class="mb-2">
                                         <label>NISN</label>
-                                        <input type="text" class="form-control" value="{{ $checkout->student->user->nisn }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $checkout->student_nisn }}" readonly>
                                     </div>
                                     <div class="mb-2">
                                         <label>Kelas</label>
-                                        <input type="text" class="form-control" value="{{ $checkout->bill->kelas->name }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $checkout->student_kelas }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="mb-2">
                                         <label>Jurusan</label>
-                                        <input type="text" class="form-control" value="{{ $checkout->student->jurusan->name }}" readonly>
+                                        <input type="text" class="form-control" value="{{ $checkout->student_jurusan }}" readonly>
                                     </div>
                                     <div class="mb-2">
                                         <label>Alamat</label>
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-2 text-center mt-2">
-                                    <input type="text" class="form-control text-center" value="{{ 'Tagihan bulan '.$checkout->bill->monthBill->name.' '.$checkout->bill->weekBill->name.' sebesar Rp. '.number_format($checkout->bill->bill) }}">
+                                    <input type="text" class="form-control text-center" value="{{ 'Tagihan bulan '.$checkout->month_name.' '.$checkout->week_name.' sebesar Rp. '.number_format($checkout->bill) }}">
                                 </div>
                                 <div class="mt-2 text-center">
                                     <button type="submit" class="btn btn-secondary shadow-sm">Checkout Tagihan</button>
