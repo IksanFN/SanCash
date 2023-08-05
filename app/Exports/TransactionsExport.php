@@ -46,11 +46,11 @@ class TransactionsExport implements FromQuery, WithMapping, WithHeadings, Should
     public function map($transactions): array
     {
         return [
-            $transactions->student->user->nisn,
-            $transactions->student->user->name,
-            $transactions->student->jurusan->name,
-            $transactions->student->kelas->name,
-            $transactions->bill->bill,
+            $transactions->student_nisn,
+            $transactions->student_name,
+            $transactions->student_jurusan,
+            $transactions->student_kelas,
+            $transactions->bill,
             $transactions->payment_status,
             $transactions->payment_date
         ];

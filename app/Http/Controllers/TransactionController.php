@@ -36,17 +36,18 @@ class TransactionController extends Controller
         
         
         $data = [
-            'studentName' => $transaction->student->user->name,
+            'billName' => $transaction->bill_name,
+            'studentName' => $transaction->student_name,
             'invoiceCode' => $transaction->invoice,
-            'weekName' => $transaction->bill->weekBill->name,
-            'monthName' => $transaction->bill->monthBill->name,
-            'yearBill' => $transaction->bill->year->name,
-            'bill' => $transaction->bill->bill,
-            'className' => $transaction->student->kelas->name,
+            'weekName' => $transaction->week_name,
+            'monthName' => $transaction->month_name,
+            'yearBill' => $transaction->year_name,
+            'bill' => $transaction->bill,
+            'className' => $transaction->student_kelas,
             'status' => $transaction->payment_status,
             'studentEmail' => $transaction->student->user->email,
             'date' => $transaction->payment_date,
-            'studentJurusan' => $transaction->student->jurusan->name,
+            'studentJurusan' => $transaction->student_jurusan,
         ];
 
         

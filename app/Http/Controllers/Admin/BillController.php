@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Bill\Store;
 use App\Models\Transaction;
 use App\Models\Year;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\Month;
 
 class BillController extends Controller
 {
@@ -63,6 +64,11 @@ class BillController extends Controller
         // Hidden token
         $request->except('_token');
 
+        $month = MonthBill::find($request->month_bill_id);
+        $week = WeekBill::find($request->month_bill_id);
+        $year = Year::find($request->month_bill_id);
+        $class = Kelas::find($request->kelas_id);
+
         // Get all student by Class
         $students = Student::whereKelasId($request->kelas_id)->get();
 
@@ -78,6 +84,10 @@ class BillController extends Controller
             $bill->month_bill_id = $request->month_bill_id;
             $bill->week_bill_id = $request->week_bill_id;
             $bill->year_id = $request->year_id;
+            $bill->kelas_name = $class->name;
+            $bill->month_name = $month->name;
+            $bill->week_name = $week->name;
+            $bill->year_name = $year->name;
             $bill->start_of_week = $request->start_of_week;
             $bill->end_of_week = $request->end_of_week;
             $bill->bill = $request->bill;
@@ -107,7 +117,16 @@ class BillController extends Controller
                     $createTransaction = new Transaction();
                     $createTransaction->uuid = Str::uuid();
                     $createTransaction->student_id = $student->id;
+                    $createTransaction->student_nisn = $student->student_nisn;
+                    $createTransaction->student_name = $student->student_name;
+                    $createTransaction->student_kelas = $student->student_class;
+                    $createTransaction->student_jurusan = $student->student_jurusan;
                     $createTransaction->bill_id = $idBill;
+                    $createTransaction->bill_name = $bill->week_name.', '.$bill->month_name.' '.$bill->year_name;
+                    $createTransaction->bill_year = $bill->year_name;
+                    $createTransaction->bill_month = $bill->month_name;
+                    $createTransaction->bill_week = $bill->week_name;
+                    $createTransaction->bill = $bill->bill;
                     $createTransaction->payment_status = 'Belum Bayar';
                     $createTransaction->invoice = $newCode;
                     $createTransaction->save();

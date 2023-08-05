@@ -20,7 +20,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h4><strong>{{ $invoice->invoice }}</strong></h4>
-                                <p class="mb-0">Tagihan : <strong>{{ $invoice->bill->weekBill->name }}, {{ $invoice->bill->monthBill->name }} {{ $invoice->bill->year->name }}</strong></p>
+                                <p class="mb-0">Tagihan : <strong>{{ $invoice->week_name }}, {{ $invoice->month_name }} {{ $invoice->year_name }}</strong></p>
                             </div>
                         </div>
                         <hr>
@@ -31,8 +31,8 @@
                             </div>
                             <div class="col-md-6 text-end">
                                 <p class="mb-0">Bill To:</p>
-                                <p class="fw-bold mb-0">{{ $invoice->student->user->name }}</p>
-                                <p>{{ $invoice->student->kelas->name }}</p>
+                                <p class="fw-bold mb-0">{{ $invoice->student_name }}</p>
+                                <p>{{ $invoice->student_kelas}}</p>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -46,11 +46,11 @@
                                 <tbody>
                                     <tr>
                                         <td>Nama Siswa</td>
-                                        <td style="text-align: right;">{{ $invoice->student->user->name }}</td>
+                                        <td style="text-align: right;">{{ $invoice->student_name }}</td>
                                     </tr>
                                     <tr>
                                         <td>Kelas</td>
-                                        <td style="text-align: right;">{{ $invoice->student->kelas->name }}</td>
+                                        <td style="text-align: right;">{{ $invoice->student_kelas }}</td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
@@ -62,7 +62,7 @@
                                     </tr>
                                     <tr>
                                         <td>Tagihan</td>
-                                        <td style="text-align: right;">IDR {{ number_format($invoice->bill->bill) }}</td>
+                                        <td style="text-align: right;">IDR {{ number_format($invoice->bill) }}</td>
                                     </tr>
                                 </tbody>
                             </table>

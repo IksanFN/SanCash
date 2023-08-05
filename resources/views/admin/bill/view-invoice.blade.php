@@ -122,7 +122,7 @@
 							<tr>
 								<td>
 									<h1>{{ $invoiceCode }}</h1>
-									<p>Tagihan: <strong>{{ $weekName }}, {{ $monthName }} {{ $yearBill }}</strong></p>
+									<p>Tagihan: <strong>{{ $billName }}</strong></p>
                                     <div style="border-bottom: 1px solid #eee; margin-top: 20px; margin-bottom: 20px;"></div>
 								</td>
 							</tr>
